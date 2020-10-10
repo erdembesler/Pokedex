@@ -5,7 +5,7 @@ import * as serviceWorker from "./serviceWorker";
 import { Router } from "react-router-dom";
 import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory({ forceRefresh: true });
+const history = createBrowserHistory({});
 ReactDOM.render(
   <React.StrictMode>
     <Router history={history}>

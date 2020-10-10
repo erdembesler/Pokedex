@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { toFirstCharUppercase } from "./constants";
+import { toFirstCharUppercase } from "../Utils/constants";
 import { Typography, Link, Button, CircularProgress } from "@material-ui/core";
 import axios from "axios";
 const Pokemon = (props) => {

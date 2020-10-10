@@ -9,11 +9,12 @@ import {
   CircularProgress,
   Typography,
   TextField,
+  Button,
 } from "@material-ui/core";
-import mockData from "./mockData";
+import mockData from "../mockData";
 
 import { fade, makeStyles } from "@material-ui/core/styles";
-import { toFirstCharUppercase } from "./constants";
+import { toFirstCharUppercase } from "../Utils/constants";
 import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 
@@ -109,7 +110,10 @@ const Pokedex = (props) => {
               variant="standard"
             />
           </div>
-        </Toolbar>{" "}
+          <Button color="inherit" onClick={() => history.push("")}>
+            MY POKEMONS
+          </Button>
+        </Toolbar>
       </AppBar>
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
