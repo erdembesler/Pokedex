@@ -6,13 +6,13 @@ import { Route, Switch } from "react-router-dom";
 
 const App = () => (
   <Switch>
-    <Route exact path="/" render={(props) => <Pokedex {...props} />} />
+    <Route path="/mypokemons" component={MyPokemons} />
     <Route
       exact
       path="/:pokemonId"
       render={(props) => <Pokemon {...props} />}
     />
-    <Route path="/MyPokemons" />
+    <Route exact path="/" render={(props) => <Pokedex {...props} />} />
   </Switch>
 );
 

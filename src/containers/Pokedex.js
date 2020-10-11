@@ -1,50 +1,16 @@
 import React, { useState, useEffect } from "react";
-import {
-  AppBar,
-  Toolbar,
-  Grid,
-  Card,
-  CardMedia,
-  CardContent,
-  CircularProgress,
-  Typography,
-  TextField,
-  Button,
-} from "@material-ui/core";
-import mockData from "../mockData";
-
-import { fade, makeStyles } from "@material-ui/core/styles";
-import { toFirstCharUppercase } from "../Utils/constants";
-import SearchIcon from "@material-ui/icons/Search";
+import { Grid, CircularProgress } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
+import CardItem from "../components/CardItem";
+import ApplicationBar from "../components/ApplicationBar";
+import { IoIosAddCircleOutline, IoIosAddCircle } from "react-icons/io";
 
 const useStyles = makeStyles((theme) => ({
   pokedexContainer: {
     paddingTop: "20px",
     paddingLeft: "50px",
     paddingRight: "50px",
-  },
-  cardMedia: {
-    margin: "auto",
-  },
-  cardContent: {
-    textAlign: "center",
-  },
-  searchContainer: {
-    display: "flex",
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
-    marginTop: "5px",
-    marginBottom: "5px",
-  },
-  searchIcon: {
-    alignSelf: "flex-end",
-    marginBottom: "5px",
-  },
-  searchInput: {
-    width: "200px",
-    margin: "5px",
   },
 }));
 
@@ -53,6 +19,15 @@ const Pokedex = (props) => {
   const [pokemonData, setPokemonData] = useState();
   const [filter, setFilter] = useState("");
   const { history } = props;
+  const [myPokemons, setMyPokemons] = useState([]);
+  const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
+  const [showMyPokemons, setShowMyPokemons] = useState(false);
+
+  useEffect(() => {
+    if (getArray !== 0) {
+      setMyPokemons([...getArray]);
+    }
+  }, []);
 
   useEffect(() => {
     axios
@@ -72,55 +47,84 @@ const Pokedex = (props) => {
         });
         setPokemonData(newPokemonData);
       });
-  });
+  }, []);
+
+  const addToMyPokes = (props) => {
+    let array = myPokemons;
+    let addArray = true;
+    array.map((item, key) => {
+      if (item === props.pokemonId) {
+        array.splice(key, 1);
+        addArray = false;
+      }
+    });
+    if (addArray) {
+      array.push(props.pokemonId);
+    }
+    setMyPokemons([...array]);
+
+    localStorage.setItem("myPokemons", JSON.stringify(myPokemons));
+
+    var storage = localStorage.getItem("pokeItem" + props.pokemonId || "0");
+
+    if (storage == null) {
+      localStorage.setItem(
+        "pokeItem" + props.pokemonId,
+        JSON.stringify(props.pokemonData[props.pokemonId])
+      );
+    } else {
+      localStorage.removeItem("pokeItem" + props.pokemonId);
+    }
+  };
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
 
-  const getPokemonCard = (pokemonId) => {
-    // console.log(pokemonData[`${pokemonId}`]);
+  const handleMyPokemonsView = () => {
+    setShowMyPokemons(!showMyPokemons);
+  };
 
+  const getCardItem = (pokemonId, history) => {
+    // console.log(pokemonData[`${pokemonId}`]);
     const { id, name, sprite } = pokemonData[pokemonId];
     return (
-      <Grid item xs={12} sm={4} key={pokemonId}>
-        <Card onClick={() => history.push(`/${pokemonId}`)}>
-          <CardMedia
-            className={classes.cardMedia}
-            image={sprite}
-            style={{ width: "130px", height: "130px" }}
-          ></CardMedia>
-          <CardContent className={classes.cardContent}>
-            <Typography>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+      <>
+        <CardItem
+          pokemonId={pokemonId}
+          id={id}
+          name={name}
+          sprite={sprite}
+          history={history}
+        />
+        {myPokemons.includes(pokemonId) ? (
+          <IoIosAddCircle
+            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
+          />
+        ) : (
+          <IoIosAddCircleOutline
+            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
+          />
+        )}
+      </>
     );
   };
   return (
     <>
-      <AppBar position="static">
-        <Toolbar>
-          <div className={classes.searchContainer}>
-            <SearchIcon className={classes.searchIcon} />
-            <TextField
-              className={classes.searchInput}
-              onChange={handleSearchChange}
-              label="Pokemon"
-              variant="standard"
-            />
-          </div>
-          <Button color="inherit" onClick={() => history.push("")}>
-            MY POKEMONS
-          </Button>
-        </Toolbar>
-      </AppBar>
+      {
+        <ApplicationBar
+          handleSearchChange={handleSearchChange}
+          history={history}
+          onClickMyPokemons={handleMyPokemonsView}
+          showMyPokemons={false}
+        />
+      }
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
           {Object.keys(pokemonData).map(
             (pokemonId) =>
               pokemonData[pokemonId].name.includes(filter) &&
-              getPokemonCard(pokemonId)
+              getCardItem(pokemonId, history)
           )}
         </Grid>
       ) : (
