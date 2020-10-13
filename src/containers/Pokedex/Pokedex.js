@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
-import CardItem from "../components/CardItem";
-import ApplicationBar from "../components/ApplicationBar";
+import CardItem from "../../components/CardItem/CardItem";
+import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
 
 const useStyles = makeStyles((theme) => ({
   pokedexContainer: {

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // import axios from "axios";
-import CardItem from "../components/CardItem";
-import ApplicationBar from "../components/ApplicationBar";
+import CardItem from "../../components/CardItem/CardItem";
+import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
 // import { IoIosAddCircleOutline, IoIosAddCircle } from "react-icons/io";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MyPokemons = (props) => {
   const classes = useStyles();
-  const [pokemonData, setPokemonData] = useState();
+  //   const [pokemonData, setPokemonData] = useState();
   const [filter, setFilter] = useState("");
   const { history } = props;
   const [showMyPokemons, setShowMyPokemons] = useState(false);

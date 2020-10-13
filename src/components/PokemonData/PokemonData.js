@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row, Col, Card, ProgressBar } from "react-bootstrap";
-import Colors from "../constants/Colors";
+import Colors from "../../constants/Colors";
 import { Button } from "@material-ui/core";
-import openBall from "../Assets/pokeball2.png";
-import closedBall from "../Assets/pokeball1.png";
-import { toFirstCharUppercase } from "../Utils/constants";
+import openBall from "../../Assets/pokeball2.png";
+import closedBall from "../../Assets/pokeball1.png";
+import { toFirstCharUppercase } from "../../Utils/constants";
 
 export default function PokemonData(props) {
   return (
@@ -75,6 +75,7 @@ export default function PokemonData(props) {
               onClick={props.onAddClick}
               width={80}
               height={80}
+              alt={props.name}
             />
           }
         </Button>

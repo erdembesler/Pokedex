@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Typography, CircularProgress } from "@material-ui/core";
 import axios from "axios";
-import PokemonData from "../components/PokemonData";
-import ApplicationBar from "../components/ApplicationBar";
+import PokemonData from "../../components/PokemonData/PokemonData";
+import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
 
 const Pokemon = (props) => {
   const { match } = props;
@@ -85,17 +85,16 @@ const Pokemon = (props) => {
 
   const generatePokemonJSX = () => {
     const {
-      id,
       name,
-      species,
-      height,
-      weight,
+      // id,
+      // species,
+      // height,
+      // weight,
       types,
       sprites,
       abilities,
       stats,
     } = pokemon;
-    const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
     const { front_default } = sprites;
     return (
       <>

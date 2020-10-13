@@ -5,13 +5,11 @@ import {
   CardMedia,
   CardContent,
   Typography,
-  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { toFirstCharUppercase } from "../Utils/constants";
-import openBall from "../Assets/pokeball2.png";
-import closedBall from "../Assets/pokeball1.png";
-import CardItemClasses from "./CardItem.css";
+import { toFirstCharUppercase } from "../../Utils/constants";
+import openBall from "../../Assets/pokeball2.png";
+import closedBall from "../../Assets/pokeball1.png";
 
 const useStyles = makeStyles((theme) => ({
   cardMedia: {
@@ -73,6 +71,7 @@ const PokemonCard = (props) => {
               onClick={props.onAddClick}
               width={40}
               height={40}
+              alt={props.name}
             />
           }
         </div>

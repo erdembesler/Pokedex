@@ -1,9 +1,8 @@
 import React from "react";
-import { AppBar, Toolbar, TextField, Button } from "@material-ui/core";
+import { AppBar, Toolbar, TextField } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { NavLink } from "react-router-dom";
-import ApplicationBarClasses from "./ApplicationBar.css";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -52,11 +51,10 @@ const ApplicationBar = (props) => {
   let navLinkAll = props.showMyPokemons
     ? classes.navLink
     : classes.navLinkHighlight;
-  {
-    if (props.pokemonView) {
-      navLinkAll = classes.navLink;
-      navLinkMy = classes.navLink;
-    }
+
+  if (props.pokemonView) {
+    navLinkAll = classes.navLink;
+    navLinkMy = classes.navLink;
   }
 
   return (
