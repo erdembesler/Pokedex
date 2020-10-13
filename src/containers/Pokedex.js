@@ -4,7 +4,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import CardItem from "../components/CardItem";
 import ApplicationBar from "../components/ApplicationBar";
-import { IoIosAddCircleOutline, IoIosAddCircle } from "react-icons/io";
 
 const useStyles = makeStyles((theme) => ({
   pokedexContainer: {
@@ -87,17 +86,37 @@ const Pokedex = (props) => {
 
   const getCardItem = (pokemonId, history) => {
     // console.log(pokemonData[`${pokemonId}`]);
-    const { id, name, sprite } = pokemonData[pokemonId];
+    const { id, name, sprite, types } = pokemonData[pokemonId];
     return (
       <>
         <CardItem
           pokemonId={pokemonId}
           id={id}
           name={name}
+          types={types}
           sprite={sprite}
           history={history}
+          onAddClick={() => addToMyPokes({ pokemonData, pokemonId })}
+          isMyPokemon={myPokemons.includes(pokemonId)}
+          showMyPokemons={false}
         />
-        {myPokemons.includes(pokemonId) ? (
+
+        {/* {myPokemons.includes(pokemonId) ? (
+          <img
+            src={closedBall}
+            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
+            width={20}
+            height={20}
+          />
+        ) : (
+          <img
+            src={openBall}
+            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
+            width={20}
+            height={20}
+          />
+        )} */}
+        {/* {myPokemons.includes(pokemonId) ? (
           <IoIosAddCircle
             onClick={() => addToMyPokes({ pokemonData, pokemonId })}
           />
@@ -105,7 +124,7 @@ const Pokedex = (props) => {
           <IoIosAddCircleOutline
             onClick={() => addToMyPokes({ pokemonData, pokemonId })}
           />
-        )}
+        )} */}
       </>
     );
   };
@@ -114,7 +133,6 @@ const Pokedex = (props) => {
       {
         <ApplicationBar
           handleSearchChange={handleSearchChange}
-          history={history}
           onClickMyPokemons={handleMyPokemonsView}
           showMyPokemons={false}
         />

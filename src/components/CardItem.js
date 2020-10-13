@@ -7,8 +7,10 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import { toFirstCharUppercase } from "../Utils/constants";
+import openBall from "../Assets/pokeball2.png";
+import closedBall from "../Assets/pokeball1.png";
 
 const useStyles = makeStyles((theme) => ({
   cardMedia: {
@@ -17,6 +19,14 @@ const useStyles = makeStyles((theme) => ({
   cardContent: {
     textAlign: "center",
   },
+  addButton: {
+    textAlign: "center",
+    marginTop: "1em",
+  },
+  grid: {
+    marginBottom: "2em",
+  },
+  card: {},
 }));
 
 const PokemonCard = (props) => {
@@ -25,19 +35,34 @@ const PokemonCard = (props) => {
   // console.log(pokemonData[`${pokemonId}`]);
 
   return (
-    <Grid item xs={12} sm={4} key={props.pokemonId}>
-      <Card onClick={() => props.history.push(`/${props.pokemonId}`)}>
+    <Grid className={classes.grid} item xs={12} sm={4} key={props.pokemonId}>
+      <Card
+        className={classes.card}
+        onClick={() => props.history.push(`/${props.id}`)}
+      >
         <CardMedia
           className={classes.cardMedia}
           image={props.sprite}
           style={{ width: "130px", height: "130px" }}
         ></CardMedia>
         <CardContent className={classes.cardContent}>
-          <Typography>{`${props.id}. ${toFirstCharUppercase(
-            props.name
-          )}`}</Typography>
+          <Typography style={{ marginBottom: "1em" }}>{`${
+            props.id
+          }. ${toFirstCharUppercase(props.name)}`}</Typography>
         </CardContent>
       </Card>
+      {!props.showMyPokemons ? (
+        <div className={classes.addButton}>
+          {
+            <img
+              src={props.isMyPokemon ? closedBall : openBall}
+              onClick={props.onAddClick}
+              width={40}
+              height={40}
+            />
+          }
+        </div>
+      ) : null}
     </Grid>
   );
 };

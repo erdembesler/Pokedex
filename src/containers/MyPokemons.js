@@ -53,6 +53,7 @@ const MyPokemons = (props) => {
           name={name}
           sprite={sprite}
           history={history}
+          showMyPokemons={true}
         />
       </>
     );
@@ -62,7 +63,6 @@ const MyPokemons = (props) => {
       {
         <ApplicationBar
           handleSearchChange={handleSearchChange}
-          history={history}
           onClickMyPokemons={handleMyPokemonsView}
           showMyPokemons={true}
         />

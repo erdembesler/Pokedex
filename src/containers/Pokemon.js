@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { toFirstCharUppercase } from "../Utils/constants";
-import { Typography, Link, Button, CircularProgress } from "@material-ui/core";
+import { Typography, CircularProgress } from "@material-ui/core";
 import axios from "axios";
+import PokemonData from "../components/PokemonData";
+import ApplicationBar from "../components/ApplicationBar";
+
 const Pokemon = (props) => {
-  const { history, match } = props;
+  const { match } = props;
   const { params } = match;
   const { pokemonId } = params;
 
@@ -22,29 +24,32 @@ const Pokemon = (props) => {
   }, [pokemonId]);
 
   const generatePokemonJSX = () => {
-    const { id, name, species, height, weight, types, sprites } = pokemon;
+    const {
+      id,
+      name,
+      species,
+      height,
+      weight,
+      types,
+      sprites,
+      abilities,
+      stats,
+    } = pokemon;
     const fullImageUrl = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`;
     const { front_default } = sprites;
     return (
       <>
-        {" "}
-        <Typography variant="h1">
-          {`${id}.`} {toFirstCharUppercase(name)}
-          <img src={front_default} />
-        </Typography>
-        <img src={fullImageUrl} />
-        <Typography variant="h3"> Pokemon Info</Typography>
-        <Typography>
-          {"Species: "} <Link href={species.url}> {species.name}</Link>
-        </Typography>
-        <Typography> Height: {height}</Typography>
-        <Typography> Weight: {weight}</Typography>
-        <Typography variant="h6"> Types: </Typography>
-        {types.map((typeInfo) => {
-          const { type } = typeInfo;
-          const { name } = type;
-          return <Typography key={name}>{`${name}`}</Typography>;
-        })}
+        <ApplicationBar pokemonView={true} />
+
+        <PokemonData
+          name={name}
+          sprite={front_default}
+          abilities={abilities}
+          stats={stats}
+          types={types}
+          // isMyPokemon={checkIfMyPoke}
+          // onAddClick={}
+        />
       </>
     );
   };
@@ -53,11 +58,6 @@ const Pokemon = (props) => {
       {pokemon === undefined && <CircularProgress />}
       {pokemon !== undefined && pokemon && generatePokemonJSX()}
       {pokemon === false && <Typography>Pokemon not found</Typography>}
-      {pokemon !== undefined && (
-        <Button variant="contained" onClick={() => history.push("/")}>
-          back to pokedex
-        </Button>
-      )}
     </>
   );
 };
