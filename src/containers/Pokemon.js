@@ -11,6 +11,66 @@ const Pokemon = (props) => {
 
   const [pokemon, setPokemon] = useState(undefined);
 
+  const [myPokemons, setMyPokemons] = useState([]);
+
+  const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
+
+  const [pokemonData, setPokemonData] = useState();
+
+  useEffect(() => {
+    if (getArray !== 0) {
+      setMyPokemons([...getArray]);
+    }
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=200`) // 200 pokemons limitation is set
+      .then(function (response) {
+        const { data } = response;
+        const { results } = data;
+        const newPokemonData = {};
+        results.forEach((pokemon, index) => {
+          newPokemonData[index + 1] = {
+            id: index + 1, // ids starts from 1
+            name: pokemon.name,
+            sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
+              index + 1
+            }.png`,
+          };
+        });
+        setPokemonData(newPokemonData);
+      });
+  }, []);
+
+  const addToMyPokes = (props) => {
+    let array = myPokemons;
+    let addArray = true;
+    array.map((item, key) => {
+      if (item === props.pokemonId) {
+        array.splice(key, 1);
+        addArray = false;
+      }
+    });
+    if (addArray) {
+      array.push(props.pokemonId);
+    }
+    setMyPokemons([...array]);
+
+    localStorage.setItem("myPokemons", JSON.stringify(myPokemons));
+
+    var storage = localStorage.getItem("pokeItem" + props.pokemonId || "0");
+
+    if (storage == null) {
+      localStorage.setItem(
+        "pokeItem" + props.pokemonId,
+        JSON.stringify(pokemonData[props.pokemonId])
+      );
+    } else {
+      localStorage.removeItem("pokeItem" + props.pokemonId);
+    }
+  };
+
   useEffect(() => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
@@ -47,8 +107,8 @@ const Pokemon = (props) => {
           abilities={abilities}
           stats={stats}
           types={types}
-          // isMyPokemon={checkIfMyPoke}
-          // onAddClick={}
+          isMyPokemon={myPokemons.includes(pokemonId)}
+          onAddClick={() => addToMyPokes({ pokemonId })}
         />
       </>
     );

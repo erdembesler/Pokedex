@@ -23,7 +23,7 @@ export default function PokemonData(props) {
                   <span>{ability.ability.name}</span>
                 </div>
               ))}
-              <h5>Types</h5>
+              <h5 style={{ marginTop: 20 }}>Types</h5>
               {props.types.map((type, key) => (
                 <div key={key}>
                   <span
@@ -45,7 +45,7 @@ export default function PokemonData(props) {
             <Card.Body>
               <h4>Base Stats</h4>
               {props.stats.map((stat, key) => (
-                <div key={key}>
+                <div key={key} style={{ marginBottom: 8 }}>
                   <strong>{stat.stat.name}</strong>
                   <ProgressBar
                     now={stat.base_stat}
@@ -71,7 +71,7 @@ export default function PokemonData(props) {
         >
           {
             <img
-              src={props.isMyPokemon ? closedBall : closedBall}
+              src={props.isMyPokemon ? closedBall : openBall}
               onClick={props.onAddClick}
               width={80}
               height={80}

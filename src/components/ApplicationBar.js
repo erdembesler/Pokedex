@@ -3,6 +3,7 @@ import { AppBar, Toolbar, TextField, Button } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { NavLink } from "react-router-dom";
+import ApplicationBarClasses from "./ApplicationBar.css";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
@@ -63,7 +64,7 @@ const ApplicationBar = (props) => {
       <Toolbar className={classes.toolbar}>
         <div className={classes.navLinkDiv}>
           <NavLink className={navLinkAll} to="/">
-            ALL POKEMONS
+            <span>ALL POKEMONS</span>
           </NavLink>
 
           <NavLink className={navLinkMy} to="/mypokemons">

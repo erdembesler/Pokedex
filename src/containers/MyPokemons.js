@@ -21,6 +21,7 @@ const MyPokemons = (props) => {
   const { history } = props;
   const [showMyPokemons, setShowMyPokemons] = useState(false);
   const [myPokemons, setMyPokemons] = useState([]);
+
   const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
 
   useEffect(() => {

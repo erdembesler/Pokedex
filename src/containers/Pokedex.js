@@ -100,31 +100,6 @@ const Pokedex = (props) => {
           isMyPokemon={myPokemons.includes(pokemonId)}
           showMyPokemons={false}
         />
-
-        {/* {myPokemons.includes(pokemonId) ? (
-          <img
-            src={closedBall}
-            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
-            width={20}
-            height={20}
-          />
-        ) : (
-          <img
-            src={openBall}
-            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
-            width={20}
-            height={20}
-          />
-        )} */}
-        {/* {myPokemons.includes(pokemonId) ? (
-          <IoIosAddCircle
-            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
-          />
-        ) : (
-          <IoIosAddCircleOutline
-            onClick={() => addToMyPokes({ pokemonData, pokemonId })}
-          />
-        )} */}
       </>
     );
   };
