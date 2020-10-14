@@ -84,25 +84,26 @@ const Pokedex = (props) => {
     setShowMyPokemons(!showMyPokemons);
   };
 
-  const getCardItem = (pokemonId, history) => {
-    // console.log(pokemonData[`${pokemonId}`]);
-    const { id, name, sprite, types } = pokemonData[pokemonId];
-    return (
-      <>
-        <CardItem
-          pokemonId={pokemonId}
-          id={id}
-          name={name}
-          types={types}
-          sprite={sprite}
-          history={history}
-          onAddClick={() => addToMyPokes({ pokemonData, pokemonId })}
-          isMyPokemon={myPokemons.includes(pokemonId)}
-          showMyPokemons={false}
-        />
-      </>
-    );
-  };
+  // const getCardItem = (pokemonId, history) => {
+  //   // console.log(pokemonData[`${pokemonId}`]);
+  //   const { id, name, sprite, types } = pokemonData[pokemonId];
+  //   return (
+  //     <>
+  //       <CardItem
+  //         pokemonId={pokemonId}
+  //         id={id}
+  //         name={name}
+  //         types={types}
+  //         sprite={sprite}
+  //         history={history}
+  //         onAddClick={() => addToMyPokes({ pokemonData, pokemonId })}
+  //         isMyPokemon={myPokemons.includes(pokemonId)}
+  //         showMyPokemons={false}
+  //       />
+  //     </>
+  //   );
+  // };
+
   return (
     <>
       {
@@ -118,9 +119,22 @@ const Pokedex = (props) => {
       {pokemonData ? (
         <Grid container spacing={2} className={classes.PokeCardContainer}>
           {Object.keys(pokemonData).map(
-            (pokemonId) =>
-              pokemonData[pokemonId].name.includes(filter) &&
-              getCardItem(pokemonId, history)
+            (pokemonId, key) =>
+              pokemonData[pokemonId].name.includes(filter) && (
+                <CardItem
+                  key={pokemonId}
+                  pokemonId={pokemonId}
+                  id={pokemonData[pokemonId].id}
+                  name={pokemonData[pokemonId].name}
+                  types={pokemonData[pokemonId].types}
+                  sprite={pokemonData[pokemonId].sprite}
+                  history={history}
+                  onAddClick={() => addToMyPokes({ pokemonData, pokemonId })}
+                  isMyPokemon={myPokemons.includes(pokemonId)}
+                  showMyPokemons={false}
+                />
+              )
+            // {getCardItem(pokemonId, history)}
           )}
         </Grid>
       ) : (

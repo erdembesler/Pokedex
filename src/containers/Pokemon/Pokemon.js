@@ -105,7 +105,11 @@ const Pokemon = (props) => {
   };
   return (
     <>
-      {pokemon === undefined && <CircularProgress />}
+      {pokemon === undefined && (
+        <div style={{ textAlign: "center" }}>
+          <CircularProgress style={{ marginTop: "10vh" }} />
+        </div>
+      )}
       {pokemon !== undefined && pokemon && generatePokemonJSX()}
       {pokemon === false && <Typography>Pokemon not found</Typography>}
     </>

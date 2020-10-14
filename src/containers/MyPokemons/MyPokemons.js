@@ -69,9 +69,18 @@ const MyPokemons = (props) => {
       {myPokemons ? (
         <Grid container spacing={2} className={classes.pokemonContainer}>
           {Object.keys(myPokemons).map(
-            (pokemonId) =>
-              myPokemons[pokemonId].name.includes(filter) &&
-              getCardItem(pokemonId, history)
+            (pokemonId, key) =>
+              myPokemons[pokemonId].name.includes(filter) && (
+                <CardItem
+                  key={pokemonId}
+                  pokemonId={pokemonId}
+                  id={myPokemons[pokemonId].id}
+                  name={myPokemons[pokemonId].name}
+                  sprite={myPokemons[pokemonId].sprite}
+                  history={history}
+                  showMyPokemons={true}
+                />
+              )
           )}
         </Grid>
       ) : (
