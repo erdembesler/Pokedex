@@ -66,6 +66,7 @@ const MyPokemons = (props) => {
           handleSearchChange={handleSearchChange}
           onClickMyPokemons={handleMyPokemonsView}
           showMyPokemons={true}
+          history={history}
         />
       }
       {myPokemons ? (

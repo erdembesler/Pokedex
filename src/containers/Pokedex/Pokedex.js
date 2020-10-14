@@ -5,9 +5,10 @@ import axios from "axios";
 import CardItem from "../../components/CardItem/CardItem";
 import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
 import SideDrawer from "../../components/SideDrawer/SideDrawer";
+import appClasses from "../Pokedex/Pokedex.css";
 
 const useStyles = makeStyles((theme) => ({
-  pokedexContainer: {
+  PokeCardContainer: {
     paddingTop: "20px",
     paddingLeft: "50px",
     paddingRight: "50px",
@@ -87,7 +88,7 @@ const Pokedex = (props) => {
   };
 
   const sideDrawerClosedHandler = () => {
-    setshowSideDrawer(false);
+    return setshowSideDrawer(false);
   };
 
   const sideDrawerToggleHandler = () => {
@@ -122,12 +123,12 @@ const Pokedex = (props) => {
             onClickMyPokemons={handleMyPokemonsView}
             showMyPokemons={false}
             drawerToggleClicked={sideDrawerToggleHandler}
+            history={history}
           />
-          <SideDrawer open={showSideDrawer} closed={sideDrawerClosedHandler} />
         </>
       }
       {pokemonData ? (
-        <Grid container spacing={2} className={classes.pokedexContainer}>
+        <Grid container spacing={2} className={classes.PokeCardContainer}>
           {Object.keys(pokemonData).map(
             (pokemonId) =>
               pokemonData[pokemonId].name.includes(filter) &&
@@ -135,7 +136,9 @@ const Pokedex = (props) => {
           )}
         </Grid>
       ) : (
-        <CircularProgress />
+        <div style={{ textAlign: "center" }}>
+          <CircularProgress style={{ marginTop: 20 }} />
+        </div>
       )}
     </>
   );

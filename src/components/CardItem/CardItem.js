@@ -5,6 +5,7 @@ import {
   CardMedia,
   CardContent,
   Typography,
+  Button,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { toFirstCharUppercase } from "../../Utils/constants";
@@ -23,11 +24,14 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     textAlign: "center",
     marginTop: "1em",
+    border: "solid",
+    borderColor: "black",
+    borderWidth: 1,
   },
   grid: {
     marginBottom: "2em",
   },
-  card: {},
+  card: { cursor: "pointer" },
 }));
 
 const PokemonCard = (props) => {
@@ -38,7 +42,7 @@ const PokemonCard = (props) => {
   return (
     <Grid className={classes.grid} item xs={12} sm={4} key={props.pokemonId}>
       <Card
-        className={"hover"}
+        className={classes.card}
         onClick={() => props.history.push(`/${props.id}`)}
       >
         <CardMedia
@@ -64,16 +68,18 @@ const PokemonCard = (props) => {
         </CardContent>
       </Card>
       {!props.showMyPokemons ? (
-        <div className={classes.addButton}>
-          {
-            <img
-              src={props.isMyPokemon ? closedBall : openBall}
-              onClick={props.onAddClick}
-              width={40}
-              height={40}
-              alt={props.name}
-            />
-          }
+        <div style={{ textAlign: "center" }}>
+          <Button className={classes.addButton}>
+            {
+              <img
+                src={props.isMyPokemon ? closedBall : openBall}
+                onClick={props.onAddClick}
+                width={40}
+                height={40}
+                alt={props.name}
+              />
+            }
+          </Button>
         </div>
       ) : null}
     </Grid>

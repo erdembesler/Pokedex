@@ -8,6 +8,7 @@ const Pokemon = (props) => {
   const { match } = props;
   const { params } = match;
   const { pokemonId } = params;
+  const { history } = props;
 
   const [pokemon, setPokemon] = useState(undefined);
 
@@ -98,7 +99,7 @@ const Pokemon = (props) => {
     const { front_default } = sprites;
     return (
       <>
-        <ApplicationBar pokemonView={true} />
+        <ApplicationBar pokemonView={true} history={history} />
 
         <PokemonData
           name={name}

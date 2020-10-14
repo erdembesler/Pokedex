@@ -11,7 +11,7 @@ export default function PokemonData(props) {
     <Container className="mt-4">
       <Row>
         <Col xs={12} md={6} style={{ textAlign: "center" }}>
-          <Card>
+          <Card style={{ marginBottom: 10 }}>
             <Card.Header>
               <h5>{toFirstCharUppercase(props.name)}</h5>
               <img src={props.sprite} alt={props.name} />
