@@ -4,14 +4,30 @@ import Colors from "../../constants/Colors";
 import { Button } from "@material-ui/core";
 import openBall from "../../Assets/pokeball2.png";
 import closedBall from "../../Assets/pokeball1.png";
+import { makeStyles } from "@material-ui/core/styles";
+
 import { toFirstCharUppercase } from "../../Utils/constants";
 
+const useStyles = makeStyles((theme) => ({
+  catchButton: {
+    width: "100%",
+    border: "solid",
+    borderWidth: 2,
+    borderColor: "black",
+    boxShadow: 5,
+    marginBottom: 20,
+  },
+  ballImage: { width: 80, height: 80 },
+}));
+
 export default function PokemonData(props) {
+  const classes = useStyles();
+
   return (
     <Container className="mt-4">
       <Row>
         <Col xs={12} md={6} style={{ textAlign: "center" }}>
-          <Card style={{ marginBottom: 10 }}>
+          <Card style={{ marginBottom: "3vh" }}>
             <Card.Header>
               <h5>{toFirstCharUppercase(props.name)}</h5>
               <img src={props.sprite} alt={props.name} />
@@ -23,7 +39,7 @@ export default function PokemonData(props) {
                   <span>{ability.ability.name}</span>
                 </div>
               ))}
-              <h5 style={{ marginTop: 20 }}>Types</h5>
+              <h5 style={{ marginTop: "2vh" }}>Types</h5>
               {props.types.map((type, key) => (
                 <div key={key}>
                   <span
@@ -45,7 +61,7 @@ export default function PokemonData(props) {
             <Card.Body>
               <h4>Base Stats</h4>
               {props.stats.map((stat, key) => (
-                <div key={key} style={{ marginBottom: 8 }}>
+                <div key={key} style={{ marginBottom: "1vh" }}>
                   <strong>{stat.stat.name}</strong>
                   <ProgressBar
                     now={stat.base_stat}
@@ -59,22 +75,12 @@ export default function PokemonData(props) {
         </Col>
       </Row>
       <div xs={12} md={9} style={{ marginTop: 30, textAlign: "center" }}>
-        <Button
-          style={{
-            width: "100%",
-            border: "solid",
-            borderWidth: 2,
-            borderColor: "black",
-            boxShadow: 5,
-            marginBottom: 20,
-          }}
-        >
+        <Button className={classes.catchButton}>
           {
             <img
+              className={classes.ballImage}
               src={props.isMyPokemon ? closedBall : openBall}
               onClick={props.onAddClick}
-              width={80}
-              height={80}
               alt={props.name}
             />
           }

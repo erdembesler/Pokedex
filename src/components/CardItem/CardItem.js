@@ -15,6 +15,8 @@ import closedBall from "../../Assets/pokeball1.png";
 const useStyles = makeStyles((theme) => ({
   cardMedia: {
     margin: "auto",
+    width: "15vh",
+    height: "15vh",
   },
   cardContent: {
     textAlign: "center",
@@ -29,9 +31,20 @@ const useStyles = makeStyles((theme) => ({
     borderWidth: 1,
   },
   grid: {
-    marginBottom: "2em",
+    marginBottom: "4vh",
   },
   card: { cursor: "pointer" },
+  nameTypo: {
+    marginBottom: "1em",
+    fontSize: 20,
+    backgroundColor: "#ffe664db",
+    borderRadius: 2,
+    color: "white",
+  },
+  ballImage: {
+    width: 40,
+    height: 40,
+  },
 }));
 
 const PokemonCard = (props) => {
@@ -48,21 +61,9 @@ const PokemonCard = (props) => {
         <CardMedia
           className={classes.cardMedia}
           image={props.sprite}
-          style={{ width: "130px", height: "130px" }}
         ></CardMedia>
         <CardContent className={classes.cardContent}>
-          <Typography
-            style={{
-              marginBottom: "1em",
-              fontSize: 20,
-              backgroundColor: "#ffe664db",
-              //   border: "solid",
-              //   borderWidth: 1,
-              //   borderColor: "#2D5A9D",
-              borderRadius: 2,
-              color: "white",
-            }}
-          >
+          <Typography className={classes.nameTypo}>
             {toFirstCharUppercase(props.name)}
           </Typography>
         </CardContent>
@@ -72,10 +73,9 @@ const PokemonCard = (props) => {
           <Button className={classes.addButton}>
             {
               <img
+                className={classes.ballImage}
                 src={props.isMyPokemon ? closedBall : openBall}
                 onClick={props.onAddClick}
-                width={40}
-                height={40}
                 alt={props.name}
               />
             }

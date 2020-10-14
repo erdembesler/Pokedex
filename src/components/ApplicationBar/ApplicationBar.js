@@ -3,23 +3,20 @@ import { AppBar, Toolbar, TextField, Button } from "@material-ui/core";
 import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import HomeIcon from "@material-ui/icons/Home";
-import { NavLink } from "react-router-dom";
-
-import NavigationItems from "../NavigationItems/NavigationItems";
-import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 import closedBall from "../../Assets/pokeball1.png";
-import pokemonText from "../../Assets/pokemonText.png";
 
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     color: "#fff",
     backgroundColor: "#3f51b5",
+    height: 70,
+    minWidth: 300,
   },
   searchContainer: {
     marginLeft: "auto",
     backgroundColor: fade(theme.palette.common.white, 0.15),
-    paddingLeft: "20px",
-    paddingRight: "20px",
+    paddingLeft: "2vh",
+    paddingRight: "2vh",
     marginTop: "5px",
     marginBottom: "5px",
   },
@@ -41,18 +38,7 @@ const useStyles = makeStyles((theme) => ({
     },
     marginRight: "auto",
   },
-  navLink: {
-    textDecoration: "none",
-    color: "inherit",
-    marginRight: "1em",
-    fontSize: "18px",
-  },
-  navLinkHighlight: {
-    textDecoration: "none",
-    color: "inherit",
-    marginRight: "1em",
-    fontSize: "20px",
-  },
+
   buttonNav: {
     color: "white",
     marginRight: "1em",
@@ -75,36 +61,20 @@ const useStyles = makeStyles((theme) => ({
   homeIcon: {
     width: 40,
     height: 40,
-    // border: "solid",
-    // borderWidth: 1,
-    // borderRadius: 2,
-    // borderColor: "white",
     cursor: "pointer",
     color: "white",
-    marginRight: 10,
+    marginRight: "1vh",
+    textAlign: "center",
   },
   imageBall: {
-    // border: "solid",
-    // borderWidth: 1,
-    // borderRadius: 2,
-    // borderColor: "white",
     cursor: "pointer",
+    width: 40,
+    height: 40,
   },
 }));
 
 const ApplicationBar = (props) => {
   const classes = useStyles();
-  let navLinkMy = props.showMyPokemons
-    ? classes.navLinkHighlight
-    : classes.navLink;
-  let navLinkAll = props.showMyPokemons
-    ? classes.navLink
-    : classes.navLinkHighlight;
-
-  if (props.pokemonView) {
-    navLinkAll = classes.navLink;
-    navLinkMy = classes.navLink;
-  }
 
   let buttonMy = props.showMyPokemons
     ? classes.buttonNavHighlight
@@ -122,7 +92,6 @@ const ApplicationBar = (props) => {
     <>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
-          <DrawerToggle clicked={props.drawerToggleClicked} />
           <div className={classes.mobilLinkDiv}>
             <Button>
               <HomeIcon
@@ -136,8 +105,6 @@ const ApplicationBar = (props) => {
                 className={classes.imageBall}
                 src={closedBall}
                 onClick={() => props.history.push(`/mypokemons`)}
-                width={40}
-                height={40}
                 alt={props.name}
               />
             </Button>
@@ -157,15 +124,6 @@ const ApplicationBar = (props) => {
             </Button>
           </div>
 
-          {/* <div className={classes.navLinkDiv}>
-            <NavLink className={navLinkAll} to="/">
-              <span>ALL POKEMONS</span>
-            </NavLink>
-
-            <NavLink className={navLinkMy} to="/mypokemons">
-              MY POKEMONS
-            </NavLink>
-          </div> */}
           {!props.pokemonView ? (
             <div className={classes.searchContainer}>
               <SearchIcon className={classes.searchIcon} />

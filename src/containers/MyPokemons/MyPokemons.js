@@ -1,27 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Grid, CircularProgress } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// import axios from "axios";
 import CardItem from "../../components/CardItem/CardItem";
 import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
-// import { IoIosAddCircleOutline, IoIosAddCircle } from "react-icons/io";
 
 const useStyles = makeStyles((theme) => ({
-  pokedexContainer: {
-    paddingTop: "20px",
-    paddingLeft: "50px",
-    paddingRight: "50px",
+  pokemonContainer: {
+    paddingTop: "2vh",
+    paddingLeft: "5vh",
+    paddingRight: "5vh",
   },
 }));
 
 const MyPokemons = (props) => {
   const classes = useStyles();
-  //   const [pokemonData, setPokemonData] = useState();
   const [filter, setFilter] = useState("");
   const { history } = props;
   const [showMyPokemons, setShowMyPokemons] = useState(false);
   const [myPokemons, setMyPokemons] = useState([]);
-
   const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
 
   useEffect(() => {
@@ -59,6 +55,7 @@ const MyPokemons = (props) => {
       </>
     );
   };
+
   return (
     <>
       {
@@ -70,7 +67,7 @@ const MyPokemons = (props) => {
         />
       }
       {myPokemons ? (
-        <Grid container spacing={2} className={classes.pokedexContainer}>
+        <Grid container spacing={2} className={classes.pokemonContainer}>
           {Object.keys(myPokemons).map(
             (pokemonId) =>
               myPokemons[pokemonId].name.includes(filter) &&

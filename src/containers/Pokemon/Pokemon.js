@@ -85,17 +85,7 @@ const Pokemon = (props) => {
   }, [pokemonId]);
 
   const generatePokemonJSX = () => {
-    const {
-      name,
-      // id,
-      // species,
-      // height,
-      // weight,
-      types,
-      sprites,
-      abilities,
-      stats,
-    } = pokemon;
+    const { name, id, types, sprites, abilities, stats } = pokemon;
     const { front_default } = sprites;
     return (
       <>

@@ -4,14 +4,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import CardItem from "../../components/CardItem/CardItem";
 import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
-import SideDrawer from "../../components/SideDrawer/SideDrawer";
-import appClasses from "../Pokedex/Pokedex.css";
 
 const useStyles = makeStyles((theme) => ({
   PokeCardContainer: {
-    paddingTop: "20px",
-    paddingLeft: "50px",
-    paddingRight: "50px",
+    paddingTop: "2vh",
+    paddingLeft: "5vh",
+    paddingRight: "5vh",
   },
 }));
 
@@ -23,7 +21,6 @@ const Pokedex = (props) => {
   const [myPokemons, setMyPokemons] = useState([]);
   const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
   const [showMyPokemons, setShowMyPokemons] = useState(false);
-  const [showSideDrawer, setshowSideDrawer] = useState(false);
 
   useEffect(() => {
     if (getArray !== 0) {
@@ -87,14 +84,6 @@ const Pokedex = (props) => {
     setShowMyPokemons(!showMyPokemons);
   };
 
-  const sideDrawerClosedHandler = () => {
-    return setshowSideDrawer(false);
-  };
-
-  const sideDrawerToggleHandler = () => {
-    setshowSideDrawer(!showSideDrawer);
-  };
-
   const getCardItem = (pokemonId, history) => {
     // console.log(pokemonData[`${pokemonId}`]);
     const { id, name, sprite, types } = pokemonData[pokemonId];
@@ -122,7 +111,6 @@ const Pokedex = (props) => {
             handleSearchChange={handleSearchChange}
             onClickMyPokemons={handleMyPokemonsView}
             showMyPokemons={false}
-            drawerToggleClicked={sideDrawerToggleHandler}
             history={history}
           />
         </>
@@ -137,7 +125,7 @@ const Pokedex = (props) => {
         </Grid>
       ) : (
         <div style={{ textAlign: "center" }}>
-          <CircularProgress style={{ marginTop: 20 }} />
+          <CircularProgress style={{ marginTop: "10vh" }} />
         </div>
       )}
     </>
