@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import CardItem from "../../components/CardItem/CardItem";
 import ApplicationBar from "../../components/ApplicationBar/ApplicationBar";
+import SideDrawer from "../../components/SideDrawer/SideDrawer";
 
 const useStyles = makeStyles((theme) => ({
   pokedexContainer: {
@@ -21,6 +22,7 @@ const Pokedex = (props) => {
   const [myPokemons, setMyPokemons] = useState([]);
   const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
   const [showMyPokemons, setShowMyPokemons] = useState(false);
+  const [showSideDrawer, setshowSideDrawer] = useState(false);
 
   useEffect(() => {
     if (getArray !== 0) {
@@ -84,6 +86,14 @@ const Pokedex = (props) => {
     setShowMyPokemons(!showMyPokemons);
   };
 
+  const sideDrawerClosedHandler = () => {
+    setshowSideDrawer(false);
+  };
+
+  const sideDrawerToggleHandler = () => {
+    setshowSideDrawer(!showSideDrawer);
+  };
+
   const getCardItem = (pokemonId, history) => {
     // console.log(pokemonData[`${pokemonId}`]);
     const { id, name, sprite, types } = pokemonData[pokemonId];
@@ -106,11 +116,15 @@ const Pokedex = (props) => {
   return (
     <>
       {
-        <ApplicationBar
-          handleSearchChange={handleSearchChange}
-          onClickMyPokemons={handleMyPokemonsView}
-          showMyPokemons={false}
-        />
+        <>
+          <ApplicationBar
+            handleSearchChange={handleSearchChange}
+            onClickMyPokemons={handleMyPokemonsView}
+            showMyPokemons={false}
+            drawerToggleClicked={sideDrawerToggleHandler}
+          />
+          <SideDrawer open={showSideDrawer} closed={sideDrawerClosedHandler} />
+        </>
       }
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>

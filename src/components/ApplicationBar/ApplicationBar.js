@@ -4,6 +4,9 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
 import { NavLink } from "react-router-dom";
 
+import NavigationItems from "../NavigationItems/NavigationItems";
+import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
+
 const useStyles = makeStyles((theme) => ({
   toolbar: {
     color: "#fff",
@@ -27,6 +30,9 @@ const useStyles = makeStyles((theme) => ({
   },
   navLinkDiv: {
     display: "flex",
+    ["@media (max-width: 699px)"]: {
+      display: "none",
+    },
     marginRight: "auto",
   },
   navLink: {
@@ -58,30 +64,33 @@ const ApplicationBar = (props) => {
   }
 
   return (
-    <AppBar position="static">
-      <Toolbar className={classes.toolbar}>
-        <div className={classes.navLinkDiv}>
-          <NavLink className={navLinkAll} to="/">
-            <span>ALL POKEMONS</span>
-          </NavLink>
+    <>
+      <AppBar position="static">
+        <Toolbar className={classes.toolbar}>
+          <DrawerToggle clicked={props.drawerToggleClicked} />
+          <div className={classes.navLinkDiv}>
+            <NavLink className={navLinkAll} to="/">
+              <span>ALL POKEMONS</span>
+            </NavLink>
 
-          <NavLink className={navLinkMy} to="/mypokemons">
-            MY POKEMONS
-          </NavLink>
-        </div>
-        {!props.pokemonView ? (
-          <div className={classes.searchContainer}>
-            <SearchIcon className={classes.searchIcon} />
-            <TextField
-              className={classes.searchInput}
-              onChange={props.handleSearchChange}
-              label="Pokemon"
-              variant="standard"
-            />
+            <NavLink className={navLinkMy} to="/mypokemons">
+              MY POKEMONS
+            </NavLink>
           </div>
-        ) : null}
-      </Toolbar>
-    </AppBar>
+          {!props.pokemonView ? (
+            <div className={classes.searchContainer}>
+              <SearchIcon className={classes.searchIcon} />
+              <TextField
+                className={classes.searchInput}
+                onChange={props.handleSearchChange}
+                label="Pokemon"
+                variant="standard"
+              />
+            </div>
+          ) : null}
+        </Toolbar>
+      </AppBar>
+    </>
   );
 };
 
