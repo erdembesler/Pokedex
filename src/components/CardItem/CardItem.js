@@ -50,8 +50,6 @@ const useStyles = makeStyles((theme) => ({
 const PokemonCard = (props) => {
   const classes = useStyles();
 
-  // console.log(pokemonData[`${pokemonId}`]);
-
   return (
     <Grid className={classes.grid} item xs={12} sm={4} key={props.pokemonId}>
       <Card

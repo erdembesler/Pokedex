@@ -22,12 +22,14 @@ const Pokedex = (props) => {
   const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
   const [showMyPokemons, setShowMyPokemons] = useState(false);
 
+  //get my pokemons
   useEffect(() => {
     if (getArray !== 0) {
       setMyPokemons([...getArray]);
     }
   }, []);
 
+  // get all pokemons
   useEffect(() => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon?limit=200`) // 200 pokemons limitation is set
@@ -48,6 +50,7 @@ const Pokedex = (props) => {
       });
   }, []);
 
+  //add Pokemon to MyPokemons or remove from MyPokemons
   const addToMyPokes = (props) => {
     let array = myPokemons;
     let addArray = true;
@@ -84,26 +87,6 @@ const Pokedex = (props) => {
     setShowMyPokemons(!showMyPokemons);
   };
 
-  // const getCardItem = (pokemonId, history) => {
-  //   // console.log(pokemonData[`${pokemonId}`]);
-  //   const { id, name, sprite, types } = pokemonData[pokemonId];
-  //   return (
-  //     <>
-  //       <CardItem
-  //         pokemonId={pokemonId}
-  //         id={id}
-  //         name={name}
-  //         types={types}
-  //         sprite={sprite}
-  //         history={history}
-  //         onAddClick={() => addToMyPokes({ pokemonData, pokemonId })}
-  //         isMyPokemon={myPokemons.includes(pokemonId)}
-  //         showMyPokemons={false}
-  //       />
-  //     </>
-  //   );
-  // };
-
   return (
     <>
       {
@@ -134,7 +117,6 @@ const Pokedex = (props) => {
                   showMyPokemons={false}
                 />
               )
-            // {getCardItem(pokemonId, history)}
           )}
         </Grid>
       ) : (

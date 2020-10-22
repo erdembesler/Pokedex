@@ -18,14 +18,17 @@ const MyPokemons = (props) => {
   const { history } = props;
   const [showMyPokemons, setShowMyPokemons] = useState(false);
   const [myPokemons, setMyPokemons] = useState([]);
+
   const getArray = JSON.parse(localStorage.getItem("myPokemons") || "0");
 
+  //get my pokemons
   useEffect(() => {
     if (getArray !== 0) {
       setMyPokemons([...getArray]);
     }
   }, []);
 
+  //get data of pokemons
   for (var i = 0; i < getArray.length; i++) {
     let x = getArray[i];
     myPokemons[i] = JSON.parse(localStorage.getItem("pokeItem" + [x]) || "");
@@ -37,23 +40,6 @@ const MyPokemons = (props) => {
 
   const handleMyPokemonsView = () => {
     setShowMyPokemons(!showMyPokemons);
-  };
-
-  const getCardItem = (pokemonId, history) => {
-    // console.log(pokemonData[`${pokemonId}`]);
-    const { id, name, sprite } = myPokemons[pokemonId];
-    return (
-      <>
-        <CardItem
-          pokemonId={pokemonId}
-          id={id}
-          name={name}
-          sprite={sprite}
-          history={history}
-          showMyPokemons={true}
-        />
-      </>
-    );
   };
 
   return (

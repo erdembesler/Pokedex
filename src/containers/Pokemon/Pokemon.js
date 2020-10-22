@@ -24,6 +24,7 @@ const Pokemon = (props) => {
     }
   }, []);
 
+  //get PokemoData
   useEffect(() => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon?limit=200`) // 200 pokemons limitation is set
@@ -44,6 +45,7 @@ const Pokemon = (props) => {
       });
   }, []);
 
+  //add Pokemon to MyPokemons or remove from MyPokemons
   const addToMyPokes = (props) => {
     let array = myPokemons;
     let addArray = true;
@@ -72,6 +74,7 @@ const Pokemon = (props) => {
     }
   };
 
+  //get pokemon data
   useEffect(() => {
     axios
       .get(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
@@ -83,7 +86,7 @@ const Pokemon = (props) => {
         setPokemon(false);
       });
   }, [pokemonId]);
-
+  //generate pokemon jsx
   const generatePokemonJSX = () => {
     const { name, id, types, sprites, abilities, stats } = pokemon;
     const { front_default } = sprites;
